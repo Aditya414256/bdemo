@@ -156,20 +156,30 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
 
-                <div class="medicine-action">
+                <div class="medicine-action" style="display:flex;gap:10px;align-items:center;">
                     <button class="view-stores-button" type="button" data-medicine-id="${m.id}" data-medicine-name="${escapeHtml(m.name)}">
                         View Stores
+                    </button>
+                    <button class="direct-order-btn" type="button" data-medicine-id="${m.id}" style="background:#0284c7;color:#ffffff;border:1px solid transparent;padding:0.65rem 1.25rem;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.9rem;font-weight:600;cursor:pointer;">
+                        Order Now
                     </button>
                 </div>
             </div>
         `).join('');
 
-        // Wire View Stores buttons
+        // Wire View Stores and Order buttons
         resultsContainer.querySelectorAll('.view-stores-button').forEach(btn => {
             btn.addEventListener('click', () => {
                 const medId = btn.getAttribute('data-medicine-id');
                 const medName = btn.getAttribute('data-medicine-name');
                 togglePharmacyStores(medId, medName, btn);
+            });
+        });
+
+        resultsContainer.querySelectorAll('.direct-order-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const medId = btn.getAttribute('data-medicine-id');
+                openOrderModal(medId);
             });
         });
     }
@@ -227,11 +237,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 panel.querySelectorAll('.order-btn').forEach(orderBtn => {
                     orderBtn.addEventListener('click', () => {
-                        handleOrderClick(
-                            orderBtn.getAttribute('data-pharmacy-id'),
-                            orderBtn.getAttribute('data-medicine-id'),
-                            orderBtn.getAttribute('data-price')
-                        );
+                        const medId = orderBtn.getAttribute('data-medicine-id');
+                        openOrderModal(medId);
                     });
                 });
             } else {
@@ -247,59 +254,6 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.disabled = false;
             btn.textContent = 'View Stores';
             showToast('Unable to load stores at this time.', 'error');
-        }
-    }
-
-    async function handleOrderClick(pharmacyId, medicineId, price) {
-        const user = getCurrentUser();
-        if (!user || !getToken()) {
-            showToast('Please log in as a customer to place an order.', 'warning');
-            setTimeout(() => {
-                window.location.href = 'login.html';
-            }, 1200);
-            return;
-        }
-
-        const qtyStr = prompt('Enter quantity to order:', '1');
-        if (!qtyStr) return;
-        const qty = parseInt(qtyStr, 10);
-        if (isNaN(qty) || qty <= 0) {
-            showToast('Invalid quantity entered.', 'error');
-            return;
-        }
-
-        const fulfillmentMethod = confirm('Click OK for Store Pickup, or Cancel for Home Delivery') ? 'PICKUP' : 'DELIVERY';
-
-        let deliveryAddress = '';
-        if (fulfillmentMethod === 'DELIVERY') {
-            deliveryAddress = prompt('Enter your delivery address:');
-            if (!deliveryAddress) {
-                showToast('Delivery address is required for home delivery.', 'warning');
-                return;
-            }
-        }
-
-        const formData = new FormData();
-        formData.append('pharmacy_id', pharmacyId);
-        formData.append('fulfillment_method', fulfillmentMethod);
-        if (deliveryAddress) {
-            formData.append('delivery_address', deliveryAddress);
-        }
-        formData.append('items', JSON.stringify([
-            { medicine_id: parseInt(medicineId, 10), quantity: qty }
-        ]));
-
-        showToast('Submitting your order...', 'info');
-
-        const res = await apiFetch('/api/orders', {
-            method: 'POST',
-            body: formData
-        });
-
-        if (res.ok && res.data) {
-            showToast(`Order #${res.data.id} placed successfully! Total: ₹${res.data.total_amount}`, 'success');
-        } else {
-            showToast(res.message || 'Failed to place order.', 'error');
         }
     }
 

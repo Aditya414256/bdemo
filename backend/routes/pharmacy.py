@@ -38,6 +38,23 @@ def get_all_verified_pharmacies():
     )
 
 
+# --- Owner Profile ---
+
+@pharmacy_bp.route('/profile', methods=['GET'])
+@roles_required(UserRole.PHARMACY_OWNER)
+def get_owner_pharmacy_profile():
+    """Retrieve pharmacy profile for the logged in owner."""
+    pharmacy = _get_owner_pharmacy()
+    if not pharmacy:
+        return api_response(False, "Pharmacy profile not found for this user.", status_code=404)
+    return api_response(
+        True,
+        "Pharmacy profile retrieved.",
+        data=pharmacy.to_dict(include_owner=True),
+        status_code=200
+    )
+
+
 # --- Orders Management ---
 
 @pharmacy_bp.route('/orders', methods=['GET'])

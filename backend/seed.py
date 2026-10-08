@@ -105,6 +105,7 @@ def seed_database():
         pharmacy1 = Pharmacy(
             owner_id=owner1.id,
             name="Apollo Pharmacy - Connaught Place",
+            license_number="DL-DEL-2023-00412",
             phone="011-23415678",
             email="apollo.cp@gmail.com",
             address="Block M, Inner Circle, Connaught Place",
@@ -124,6 +125,7 @@ def seed_database():
         pharmacy2 = Pharmacy(
             owner_id=owner2.id,
             name="Wellness Forever Chemist",
+            license_number="DL-DEL-2022-00891",
             phone="011-26598741",
             address="Shop 4, Hauz Khas Main Market",
             city="New Delhi",
@@ -142,6 +144,7 @@ def seed_database():
         pharmacy3 = Pharmacy(
             owner_id=owner3.id,
             name="MedPlus Healthcare Store",
+            license_number="DL-UP-2021-00125",
             phone="011-27489632",
             address="C-12, Sector 18, Commercial Belt",
             city="Noida",
@@ -160,6 +163,7 @@ def seed_database():
         pharmacy4 = Pharmacy(
             owner_id=owner_pending.id,
             name="CityMed 24x7 Chemist",
+            license_number="DL-DEL-2024-00994",
             phone="011-29874561",
             address="Plot 15, Dwarka Sector 10",
             city="New Delhi",

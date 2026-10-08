@@ -70,6 +70,32 @@ def get_suggestions():
     return api_response(True, "Suggestions retrieved.", data={'suggestions': suggestions}, status_code=200)
 
 
+@medicines_bp.route('', methods=['GET'])
+def get_all_medicines():
+    """List all medicines in the master catalog."""
+    medicines = Medicine.query.order_by(Medicine.name.asc()).all()
+    return api_response(
+        True,
+        f"Retrieved {len(medicines)} catalog medicines.",
+        data={'medicines': [m.to_dict() for m in medicines]},
+        status_code=200
+    )
+
+
+@medicines_bp.route('/<int:medicine_id>', methods=['GET'])
+def get_medicine_details(medicine_id: int):
+    """Retrieve details for a single medicine."""
+    medicine = db.session.get(Medicine, medicine_id)
+    if not medicine:
+        return api_response(False, "Medicine not found.", status_code=404)
+    return api_response(
+        True,
+        "Medicine details retrieved.",
+        data=medicine.to_dict(),
+        status_code=200
+    )
+
+
 @medicines_bp.route('/<int:medicine_id>/pharmacies', methods=['GET'])
 def get_pharmacies_for_medicine(medicine_id: int):
     """

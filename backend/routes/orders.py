@@ -35,7 +35,7 @@ def create_order():
     except (TypeError, ValueError):
         return api_response(False, "A valid pharmacy_id is required.", status_code=400)
 
-    fulfillment_type = form_data.get('fulfillment_type', FulfillmentType.PICKUP).strip().upper()
+    fulfillment_type = (form_data.get('fulfillment_type') or form_data.get('fulfillment_method') or FulfillmentType.PICKUP).strip().upper()
     payment_method = form_data.get('payment_method', PaymentMethod.CASH).strip().upper()
     customer_phone = form_data.get('customer_phone', current_user.phone or '').strip()
     delivery_address = form_data.get('delivery_address', '').strip()

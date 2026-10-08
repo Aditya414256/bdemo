@@ -38,6 +38,7 @@ class User(db.Model):
         return {
             'id': self.id,
             'name': self.name,
+            'full_name': self.name,
             'email': self.email,
             'phone': self.phone,
             'role': self.role,

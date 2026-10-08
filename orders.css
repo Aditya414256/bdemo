@@ -1,0 +1,188 @@
+/* ==========================================
+   MediFind - Customer Orders & Live Status CSS
+   ========================================== */
+
+.orders-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.orders-header {
+    margin-bottom: 25px;
+}
+
+.orders-header h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem;
+    color: #0f172a;
+    margin: 0 0 8px 0;
+}
+
+.orders-header p {
+    color: #64748b;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.orders-layout {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 25px;
+    align-items: start;
+}
+
+@media (max-width: 860px) {
+    .orders-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Orders List Panel */
+.orders-list-panel {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+}
+
+.order-item-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #ffffff;
+}
+
+.order-item-card:hover {
+    border-color: #cbd5e1;
+    transform: translateY(-1px);
+}
+
+.order-item-card.active {
+    border-color: #0284c7;
+    background: #f0f9ff;
+    box-shadow: 0 4px 10px rgba(2, 132, 199, 0.12);
+}
+
+/* Tracking Detail Panel */
+.tracking-panel {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+}
+
+/* Status Banner */
+.status-banner {
+    padding: 16px 20px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.status-banner.placed {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+.status-banner.accepted {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.status-banner.preparing {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.status-banner.ready {
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+.status-banner.completed {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.status-banner.rejected {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+/* Stepper */
+.stepper-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin: 30px 0 35px 0;
+}
+
+.stepper-container::before {
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: 20px;
+    right: 20px;
+    height: 4px;
+    background: #e2e8f0;
+    z-index: 1;
+}
+
+.stepper-step {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    flex: 1;
+}
+
+.stepper-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #f1f5f9;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin: 0 auto 8px auto;
+    border: 3px solid #ffffff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+    transition: all 0.2s ease;
+}
+
+.stepper-step.active .stepper-circle {
+    background: #0284c7;
+    color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.2);
+}
+
+.stepper-step.completed .stepper-circle {
+    background: #10b981;
+    color: #ffffff;
+}
+
+.stepper-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #64748b;
+}
+
+.stepper-step.active .stepper-label {
+    color: #0284c7;
+    font-weight: 700;
+}
+
+.stepper-step.completed .stepper-label {
+    color: #0f172a;
+}

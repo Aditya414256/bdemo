@@ -151,32 +151,80 @@ function showToast(message, type = 'info') {
 }
 
 // Navbar dynamic authentication update
+// Navbar dynamic navigation update based on role
 function initNavbarAuth() {
     const user = getCurrentUser();
+    const section2 = document.querySelector('.section2');
     const section3 = document.querySelector('.section3');
-    if (!section3) return;
 
-    if (user && getToken()) {
-        section3.innerHTML = `
-            <div style="display:flex;align-items:center;gap:12px;">
-                <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;color:#0f172a;font-weight:600;background:#e0f2fe;padding:6px 12px;border-radius:20px;">
-                    👤 ${escapeHtml(user.full_name || user.email)} (${user.role.replace('_', ' ')})
-                </span>
-                <button id="nav-logout-btn" style="background:#f1f5f9;color:#475569;border:1px solid #cbd5e1;padding:6px 14px;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:0.85rem;cursor:pointer;transition:all 0.2s ease;">
-                    Sign Out
-                </button>
-            </div>
-        `;
-
-        const logoutBtn = document.getElementById('nav-logout-btn');
-        if (logoutBtn) {
-            logoutBtn.addEventListener('click', () => {
-                clearSession();
-                showToast('Signed out successfully.', 'info');
-                setTimeout(() => window.location.reload(), 600);
-            });
+    if (section2) {
+        if (user && user.role === 'CUSTOMER') {
+            section2.innerHTML = `
+                <a class="home" href="HomePage.html">Home</a>
+                <a class="findmedi" href="FindMedi.html">Find Medicine</a>
+                <a class="pharmacies" href="Pharmacies.html">Pharmacies</a>
+                <a class="orders" href="orders.html" style="color:#0284c7;font-weight:700;">My Orders</a>
+            `;
+        } else if (user && user.role === 'PHARMACY_OWNER') {
+            section2.innerHTML = `
+                <a class="home" href="HomePage.html">Home</a>
+                <a class="pharmacies" href="Pharmacies.html">Pharmacies</a>
+                <a class="dashboard" href="pharmacy-dashboard.html" style="color:#0284c7;font-weight:700;">Pharmacy Dashboard</a>
+            `;
+        } else if (user && user.role === 'ADMIN') {
+            section2.innerHTML = `
+                <a class="home" href="HomePage.html">Home</a>
+                <a class="pharmacies" href="Pharmacies.html">Pharmacies</a>
+                <a class="admin" href="admin-dashboard.html" style="color:#0284c7;font-weight:700;">Admin Verification</a>
+            `;
+        } else {
+            section2.innerHTML = `
+                <a class="home" href="HomePage.html">Home</a>
+                <a class="findmedi" href="FindMedi.html">Find Medicine</a>
+                <a class="pharmacies" href="Pharmacies.html">Pharmacies</a>
+            `;
         }
     }
+
+    if (section3) {
+        if (user && getToken()) {
+            section3.innerHTML = `
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;color:#0f172a;font-weight:600;background:#e0f2fe;padding:6px 12px;border-radius:20px;white-space:nowrap;">
+                        👤 ${escapeHtml(user.full_name || user.name || user.email)} (${user.role.replace('_', ' ')})
+                    </span>
+                    <button id="nav-logout-btn" style="background:#f1f5f9;color:#475569;border:1px solid #cbd5e1;padding:6px 14px;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:0.85rem;cursor:pointer;transition:all 0.2s ease;">
+                        Sign Out
+                    </button>
+                </div>
+            `;
+
+            const logoutBtn = document.getElementById('nav-logout-btn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', async () => {
+                    await apiFetch('/api/auth/logout', { method: 'POST' });
+                    clearSession();
+                    showToast('Signed out successfully.', 'info');
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 500);
+                });
+            }
+        }
+    }
+}
+
+function requireRole(allowedRoles = [], redirectUrl = 'login.html') {
+    const user = getCurrentUser();
+    const token = getToken();
+    if (!user || !token || !allowedRoles.includes(user.role)) {
+        showToast('Unauthorized access. Redirecting...', 'warning');
+        setTimeout(() => {
+            window.location.href = redirectUrl;
+        }, 800);
+        return false;
+    }
+    return true;
 }
 
 function escapeHtml(text) {

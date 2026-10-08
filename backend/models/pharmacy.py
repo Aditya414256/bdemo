@@ -15,6 +15,7 @@ class Pharmacy(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False, index=True)
     name = db.Column(db.String(200), nullable=False)
+    license_number = db.Column(db.String(100), nullable=True)
     phone = db.Column(db.String(20), nullable=True)
     email = db.Column(db.String(120), nullable=True)
     address = db.Column(db.String(255), nullable=False)
@@ -39,6 +40,7 @@ class Pharmacy(db.Model):
             'id': self.id,
             'owner_id': self.owner_id,
             'name': self.name,
+            'license_number': self.license_number,
             'phone': self.phone,
             'email': self.email,
             'address': self.address,

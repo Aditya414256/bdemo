@@ -82,6 +82,7 @@ class Order(db.Model):
             'status': self.status,
             'status_message': self.get_customer_message(),
             'fulfillment_type': self.fulfillment_type,
+            'fulfillment_method': self.fulfillment_type,
             'payment_method': self.payment_method,
             'payment_status': self.payment_status,
             'delivery_address': self.delivery_address,

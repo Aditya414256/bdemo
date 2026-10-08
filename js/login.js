@@ -38,8 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 showToast(`Welcome back, ${res.data.user.full_name || 'User'}!`, 'success');
 
                 setTimeout(() => {
-                    // Redirect to home page
-                    window.location.href = 'HomePage.html';
+                    if (res.data.user.role === 'PHARMACY_OWNER') {
+                        window.location.href = 'pharmacy-dashboard.html';
+                    } else if (res.data.user.role === 'ADMIN') {
+                        window.location.href = 'admin-dashboard.html';
+                    } else {
+                        window.location.href = 'HomePage.html';
+                    }
                 }, 800);
             } else {
                 showToast(res.message || 'Login failed. Please check your credentials.', 'error');

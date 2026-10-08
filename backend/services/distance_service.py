@@ -46,8 +46,11 @@ def rank_pharmacies(pharmacies_with_inventory, customer_lat=None, customer_lon=N
         city_match = 1 if (customer_city and pharmacy.city and str(customer_city).strip().lower() == str(pharmacy.city).strip().lower()) else 0
         
         results.append({
+            'id': pharmacy.id,
             'pharmacy_id': pharmacy.id,
+            'owner_id': pharmacy.owner_id,
             'name': pharmacy.name,
+            'license_number': pharmacy.license_number,
             'phone': pharmacy.phone,
             'email': pharmacy.email,
             'address': pharmacy.address,
@@ -57,8 +60,10 @@ def rank_pharmacies(pharmacies_with_inventory, customer_lat=None, customer_lon=N
             'supports_pickup': pharmacy.supports_pickup,
             'supports_delivery': pharmacy.supports_delivery,
             'distance_km': distance,
+            'quantity': inv.quantity,
             'available_quantity': inv.quantity,
             'price': inv.price,
+            'stock_status': inv.stock_status,
             '_pincode_match': pincode_match,
             '_city_match': city_match
         })

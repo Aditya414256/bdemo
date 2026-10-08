@@ -16,7 +16,7 @@ def get_pending_pharmacies():
     return api_response(
         True,
         f"Found {len(pending_list)} pending pharmacy verification requests.",
-        data={'pharmacies': [p.to_dict(include_owner=True) for p in pending_list]},
+        data={'pending_pharmacies': [p.to_dict(include_owner=True) for p in pending_list]},
         status_code=200
     )
 
@@ -48,6 +48,6 @@ def update_pharmacy_verification(pharmacy_id: int):
     return api_response(
         True,
         f"Pharmacy '{pharmacy.name}' verification status set to {new_status}.",
-        data={'pharmacy': pharmacy.to_dict(include_owner=True)},
+        data=pharmacy.to_dict(include_owner=True),
         status_code=200
     )

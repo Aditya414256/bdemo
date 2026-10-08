@@ -4,8 +4,8 @@ def test_admin_list_pending_pharmacies(client, auth_tokens):
     data = response.get_json()
     assert response.status_code == 200
     assert data['success'] is True
-    assert len(data['data']['pharmacies']) >= 1
-    assert data['data']['pharmacies'][0]['name'] == "Pending Test Pharmacy"
+    assert len(data['data']['pending_pharmacies']) >= 1
+    assert data['data']['pending_pharmacies'][0]['name'] == "Pending Test Pharmacy"
 
 
 def test_admin_approve_pharmacy(client, auth_tokens):
@@ -18,7 +18,7 @@ def test_admin_approve_pharmacy(client, auth_tokens):
     data = response.get_json()
     assert response.status_code == 200
     assert data['success'] is True
-    assert data['data']['pharmacy']['verification_status'] == 'APPROVED'
+    assert data['data']['verification_status'] == 'APPROVED'
 
 
 def test_non_admin_forbidden(client, auth_tokens):

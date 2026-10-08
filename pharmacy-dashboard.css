@@ -1,0 +1,145 @@
+/* ==========================================
+   MediFind - Pharmacy Dashboard CSS
+   ========================================== */
+
+.dashboard-container {
+    max-width: 1140px;
+    margin: 35px auto;
+    padding: 0 20px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Pharmacy Profile Header */
+.pharmacy-profile-header {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px 28px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.pharmacy-title-area h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.85rem;
+    color: #0f172a;
+    margin: 0 0 6px 0;
+}
+
+.pharmacy-meta {
+    font-size: 0.88rem;
+    color: #64748b;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+/* Dashboard Tabs */
+.dashboard-tabs {
+    display: flex;
+    gap: 12px;
+    border-bottom: 2px solid #e2e8f0;
+    margin-bottom: 24px;
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    padding: 12px 20px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #64748b;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tab-btn:hover {
+    color: #0f172a;
+}
+
+.tab-btn.active {
+    color: #0284c7;
+    border-bottom-color: #0284c7;
+}
+
+/* Tab Panels */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Order Cards in Dashboard */
+.owner-order-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+    transition: all 0.2s;
+}
+
+.owner-order-card:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.07);
+}
+
+.action-btn {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+}
+
+.action-btn.accept {
+    background: #10b981;
+    color: #ffffff;
+}
+.action-btn.accept:hover {
+    background: #059669;
+}
+
+.action-btn.reject {
+    background: #ef4444;
+    color: #ffffff;
+}
+.action-btn.reject:hover {
+    background: #dc2626;
+}
+
+.action-btn.advance {
+    background: #0284c7;
+    color: #ffffff;
+}
+.action-btn.advance:hover {
+    background: #0369a1;
+}
+
+.action-btn.secondary {
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+}
+.action-btn.secondary:hover {
+    background: #e2e8f0;
+}

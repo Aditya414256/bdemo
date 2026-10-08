@@ -10,7 +10,7 @@ def register_customer():
     """Register a new customer account."""
     data = request.get_json() or {}
     
-    name = data.get('name', '').strip()
+    name = (data.get('name') or data.get('full_name') or '').strip()
     email = data.get('email', '').strip().lower()
     password = data.get('password', '')
     phone = data.get('phone', '').strip()
@@ -56,18 +56,19 @@ def register_pharmacy():
     """
     data = request.get_json() or {}
 
-    owner_name = data.get('name', '').strip()
+    owner_name = (data.get('name') or data.get('full_name') or '').strip()
     email = data.get('email', '').strip().lower()
     password = data.get('password', '')
     phone = data.get('phone', '').strip()
 
     pharmacy_name = data.get('pharmacy_name', '').strip()
+    license_number = data.get('license_number', '').strip()
     address = data.get('address', '').strip()
     city = data.get('city', '').strip()
     state = data.get('state', '').strip()
     pincode = data.get('pincode', '').strip()
-    pharmacy_phone = data.get('pharmacy_phone', phone).strip()
-    pharmacy_email = data.get('pharmacy_email', email).strip().lower()
+    pharmacy_phone = (data.get('pharmacy_phone') or phone).strip()
+    pharmacy_email = (data.get('pharmacy_email') or email).strip().lower()
 
     # Optional fields
     latitude = data.get('latitude')
@@ -104,6 +105,7 @@ def register_pharmacy():
     pharmacy = Pharmacy(
         owner_id=user.id,
         name=pharmacy_name,
+        license_number=license_number if license_number else None,
         phone=pharmacy_phone if pharmacy_phone else None,
         email=pharmacy_email if pharmacy_email else None,
         address=address,
