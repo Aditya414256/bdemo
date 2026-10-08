@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="HomePage.css">
+
+    <title>MediFind</title>
+
+</head>
+
+<body>
+
+    <!-- ============================= -->
+    <!-- NAVBAR -->
+    <!-- ============================= -->
+
+    <div class="container">
+
+        <div class="section1">
+
+            <div class="logo">
+
+                <div class="logo-icon">
+                    +
+                </div>
+
+                <span>
+                    MediFind
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="section2">
+
+            <a
+                class="home"
+                href="HomePage.html"
+            >
+                Home
+            </a>
+
+            <a
+                class="pharmacies"
+                href="Pharmacies.html"
+            >
+                Pharmacies
+            </a>
+
+        </div>
+
+
+        <div class="section3">
+
+            <a
+                class="login"
+                href="login.html"
+            >
+                Login
+            </a>
+
+            <a
+                class="register"
+                href="register.html"
+            >
+                Register
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- HERO -->
+    <!-- ============================= -->
+
+    <section class="web-intro">
+
+        <h1>
+            Find your medicine.<br>
+            Find a <span>verified pharmacy</span>.
+        </h1>
+
+        <p>
+            Search medicines and discover verified pharmacies through MediFind.
+        </p>
+
+    </section>
+
+
+    <!-- ============================= -->
+    <!-- SEARCH -->
+    <!-- ============================= -->
+
+    <section class="search-section">
+
+        <div class="search-wrapper">
+
+            <div class="search-bar">
+
+                <div class="search-input-group">
+
+                    <span class="search-icon">
+                        ⌕
+                    </span>
+
+                    <input
+                        class="search-input"
+                        id="home-search-input"
+                        name="medicine"
+                        type="text"
+                        placeholder="Search medicine or generic name..."
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <button
+                    class="search-button"
+                    type="button"
+                >
+                    Search
+                </button>
+
+            </div>
+
+
+            <!-- AUTOCOMPLETE AREA -->
+            <div
+                class="search-suggestions"
+                id="search-suggestions"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ============================= -->
+    <!-- MEDICINE RESULTS -->
+    <!-- ============================= -->
+
+    <section class="home-results">
+
+        <div
+            class="medicine-results"
+            id="medicine-results"
+        ></div>
+
+    </section>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/home.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="HomePage.css">
+    <link rel="stylesheet" href="login.css">
+
+    <title>Login - MediFind</title>
+
+</head>
+
+<body>
+
+    <!-- ============================= -->
+    <!-- NAVBAR -->
+    <!-- ============================= -->
+
+    <div class="container">
+
+        <div class="section1">
+
+            <div class="logo">
+
+                <div class="logo-icon">
+                    +
+                </div>
+
+                <span>
+                    MediFind
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="section2">
+
+            <a
+                class="home"
+                href="HomePage.html"
+            >
+                Home
+            </a>
+
+            <a
+                class="pharmacies"
+                href="Pharmacies.html"
+            >
+                Pharmacies
+            </a>
+
+        </div>
+
+
+        <div class="section3">
+
+            <a
+                class="login"
+                href="login.html"
+            >
+                Login
+            </a>
+
+            <a
+                class="register"
+                href="register.html"
+            >
+                Register
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- LOGIN -->
+    <!-- ============================= -->
+
+    <section class="Login">
+
+        <div class="login-card">
+
+            <div class="login-form-container">
+
+                <form>
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="login-email">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="login-email"
+                            placeholder=""
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group password-group">
+
+                        <div class="password-label">
+
+                            <label for="login-password">
+                                Password
+                            </label>
+
+                            <a href="#">
+                                Forgot Password?
+                            </a>
+
+                        </div>
+
+
+                        <input
+                            type="password"
+                            id="login-password"
+                            placeholder=""
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- SIGN IN -->
+
+                    <button
+                        type="submit"
+                        class="sign-in-button"
+                    >
+                        Sign In
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- ============================= -->
+            <!-- REGISTER LINK -->
+            <!-- ============================= -->
+
+            <div class="login-footer">
+
+                Don't have an account?
+
+                <a href="register.html">
+                    Sign Up
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/login.js"></script>
+</body>
+
+</html>
